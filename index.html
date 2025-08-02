@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thiệp Yêu Thương</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #fddde6, #ffeef3);
+      text-align: center;
+      color: #5f1a37;
+      overflow: hidden;
+    }
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2em;
+      margin-top: 20px;
+    }
+    .photo-container {
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .photo-container img {
+      width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    #cardContent {
+      display: none;
+      animation: fadeIn 1.5s ease-in-out forwards;
+    }
+    .message-box {
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 500px;
+      background: #ffffffaa;
+      border-radius: 20px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.2em;
+      line-height: 1.6em;
+    }
+    .heart-button {
+      margin: 20px 0;
+      padding: 10px 20px;
+      background: #ff85a2;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .heart-button:hover { background: #ff5d84; }
+    .big-heart {
+      font-size: 4em;
+      color: #ff3c6e;
+      display: none;
+    }
+    .extra-note {
+      margin: 20px;
+      background: pink;
+      padding: 10px 20px;
+      border-radius: 15px;
+      font-weight: bold;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      opacity: 0.7;
+      animation: float linear infinite;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px; height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { top: 0; left: -10px; }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 0.8; }
+      100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Em là điều dịu dàng nhất mà anh từng biết đến...</h1>
+  <div class="photo-container" onclick="openCard()">
+    <img src="anh_bia.png" alt="Ảnh của em">
+  </div>
+  <div id="cardContent">
+    <div class="message-box">
+      Cảm ơn em vì đã đến, vì đã mỉm cười, vì đã lắng nghe và yêu anh theo cách mà không ai khác có thể.<br/>
+      Mỗi ngày có em, anh đều thấy mình may mắn hơn hôm qua.<br/>
+      Dù là món quà nhỏ, anh mong chiếc thiệp này làm em mỉm cười 💌
+    </div>
+    <button class="heart-button" onclick="showHeart()">Nhấn vào đây nếu em cũng yêu anh 😊</button>
+    <div id="bigHeart" class="big-heart">💖</div>
+    <div class="extra-note">:3 Em iu thích nhất nhé heheeee</div>
+  </div>
+  <script>
+    function openCard() {
+      document.getElementById("cardContent").style.display = 'block';
+    }
+    function showHeart() {
+      document.getElementById("bigHeart").style.display = 'block';
+    }
+    for (let i = 0; i < 25; i++) {
+      let heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 6 + Math.random() * 4 + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
