@@ -1,128 +1,153 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Thiệp Yêu Thương</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thiệp Mở Thư CSS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to bottom right, #fddde6, #ffeef3);
+      font-family: 'Segoe UI', sans-serif;
       text-align: center;
-      color: #5f1a37;
       overflow: hidden;
+      margin: 0;
+      color: #5f1a37;
     }
-    h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: 2em;
-      margin-top: 20px;
-    }
-    .photo-container {
-      margin-top: 20px;
+    .envelope {
+      position: relative;
+      width: 320px;
+      height: 200px;
+      margin: 80px auto 30px;
+      background: #fff;
+      border: 2px solid #e08e9a;
+      border-radius: 6px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       cursor: pointer;
+      transition: all 0.6s ease;
     }
-    .photo-container img {
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 160px solid transparent;
+      border-right: 160px solid transparent;
+      border-bottom: 100px solid #ffb6c1;
+      transform-origin: top center;
+      transition: transform 1s ease;
+      z-index: 2;
+    }
+    .paper {
+      position: absolute;
+      top: 20px;
+      left: 10px;
       width: 300px;
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    #cardContent {
-      display: none;
-      animation: fadeIn 1.5s ease-in-out forwards;
-    }
-    .message-box {
-      margin: 30px auto;
+      height: 160px;
+      background: #fff;
+      border-radius: 4px;
       padding: 20px;
-      max-width: 500px;
-      background: #ffffffaa;
-      border-radius: 20px;
       font-family: 'Great Vibes', cursive;
       font-size: 1.2em;
-      line-height: 1.6em;
+      line-height: 1.5em;
+      transform: translateY(120%);
+      transition: transform 1s ease, opacity 1s ease;
+      opacity: 0;
+      z-index: 1;
+    }
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+    }
+    .envelope.open .paper {
+      transform: translateY(0);
+      opacity: 1;
     }
     .heart-button {
-      margin: 20px 0;
-      padding: 10px 20px;
+      margin-top: 10px;
+      padding: 8px 16px;
       background: #ff85a2;
-      color: #fff;
+      color: white;
       border: none;
-      border-radius: 30px;
+      border-radius: 25px;
       cursor: pointer;
+      font-size: 1em;
     }
-    .heart-button:hover { background: #ff5d84; }
+    .heart-button:hover {
+      background-color: #ff5d84;
+    }
     .big-heart {
-      font-size: 4em;
+      font-size: 3em;
       color: #ff3c6e;
       display: none;
+      animation: heartPop 1s ease-in-out forwards;
     }
     .extra-note {
-      margin: 20px;
       background: pink;
-      padding: 10px 20px;
+      padding: 8px 14px;
       border-radius: 15px;
       font-weight: bold;
+      margin-top: 10px;
+      display: inline-block;
     }
     .heart {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       background: pink;
       transform: rotate(45deg);
       opacity: 0.7;
       animation: float linear infinite;
     }
-    .heart::before,
-    .heart::after {
+    .heart::before, .heart::after {
       content: "";
       position: absolute;
-      width: 20px; height: 20px;
+      width: 18px;
+      height: 18px;
       background: pink;
       border-radius: 50%;
     }
-    .heart::before { top: -10px; left: 0; }
-    .heart::after { top: 0; left: -10px; }
+    .heart::before { top: -9px; left: 0; }
+    .heart::after { top: 0; left: -9px; }
     @keyframes float {
       0% { transform: translateY(0) rotate(45deg); opacity: 0.8; }
       100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; } to { opacity: 1; }
+    @keyframes heartPop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <h1>Em là điều dịu dàng nhất mà anh từng biết đến...</h1>
-  <div class="photo-container" onclick="openCard()">
-    <img src="anh_bia.png" alt="Ảnh của em">
-  </div>
-  <div id="cardContent">
-    <div class="message-box">
-      Cảm ơn em vì đã đến, vì đã mỉm cười, vì đã lắng nghe và yêu anh theo cách mà không ai khác có thể.<br/>
-      Mỗi ngày có em, anh đều thấy mình may mắn hơn hôm qua.<br/>
-      Dù là món quà nhỏ, anh mong chiếc thiệp này làm em mỉm cười 💌
+  <h1 style="font-family: 'Great Vibes', cursive; font-size: 2em; margin-top: 30px;">
+    Em là điều dịu dàng nhất mà anh từng biết đến...
+  </h1>
+  <div class="envelope" onclick="openEnvelope(this)">
+    <div class="flap"></div>
+    <div class="paper">
+      Cảm ơn em vì đã đến, vì đã mỉm cười, vì đã yêu anh theo cách mà không ai khác có thể.<br>
+      Mỗi ngày có em, anh đều thấy mình may mắn hơn hôm qua 💌<br><br>
+      <button class="heart-button" onclick="showHeart(event)">Nếu em cũng yêu anh 😊</button>
+      <div id="bigHeart" class="big-heart">💖</div>
+      <div class="extra-note">:3 Em iu thích nhất nhé heheeee</div>
     </div>
-    <button class="heart-button" onclick="showHeart()">Nhấn vào đây nếu em cũng yêu anh 😊</button>
-    <div id="bigHeart" class="big-heart">💖</div>
-    <div class="extra-note">:3 Em iu thích nhất nhé heheeee</div>
   </div>
   <script>
-    function openCard() {
-      document.getElementById("cardContent").style.display = 'block';
+    function openEnvelope(el) {
+      el.classList.toggle('open');
     }
-    function showHeart() {
+    function showHeart(e) {
+      e.stopPropagation();
       document.getElementById("bigHeart").style.display = 'block';
     }
-    for (let i = 0; i < 25; i++) {
-      let heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = 6 + Math.random() * 4 + 's';
-      heart.style.animationDelay = Math.random() * 5 + 's';
-      document.body.appendChild(heart);
+    for (let i = 0; i < 20; i++) {
+      let h = document.createElement('div');
+      h.className = 'heart';
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.animationDuration = 5 + Math.random() * 3 + 's';
+      h.style.animationDelay = Math.random() * 4 + 's';
+      document.body.appendChild(h);
     }
   </script>
 </body>
